@@ -3,6 +3,8 @@ import { GlobalStyles } from '@mui/material';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { SnackbarProvider } from 'notistack';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -71,7 +73,7 @@ export default function App(props: ExtendedAppProps) {
 
         mixins: {
           toolbar: {
-            minHeight: 56,
+            minHeight: '56px',
           },
         },
       }),
@@ -94,11 +96,13 @@ export default function App(props: ExtendedAppProps) {
           horizontal: 'right',
         }}
       >
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <GlobalStyles styles={Global(theme) as any} />
-          {getLayout(<Component {...pageProps} />)}
-        </ThemeProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <GlobalStyles styles={Global(theme) as any} />
+            {getLayout(<Component {...pageProps} />)}
+          </ThemeProvider>
+        </LocalizationProvider>
       </SnackbarProvider>
     </CacheProvider>
   );

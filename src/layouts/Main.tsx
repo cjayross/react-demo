@@ -9,7 +9,9 @@ export default function Main(page: ReactElement): ReactNode {
   useEffect(() => void (container.current = window?.document.body), []);
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box
+      sx={{ display: 'flex', pt: (theme) => theme.mixins.toolbar.minHeight }}
+    >
       <AppBar
         position="fixed"
         sx={{

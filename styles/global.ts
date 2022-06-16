@@ -19,10 +19,6 @@ export const Colors: PaletteOptions = {
   success: {
     main: '#4bb543',
   },
-
-  text: {
-    secondary: '#ffffff',
-  },
 };
 
 export const Typography = {
