@@ -1,6 +1,7 @@
 import createEmotionServer from '@emotion/server/create-instance';
 import NextDocument, { Head, Html, Main, NextScript } from 'next/document';
 import emotionCache from '@/emotion-cache';
+import apolloClient from '@/apollo-client';
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: any) {
@@ -14,6 +15,7 @@ export default class Document extends NextDocument {
             return (
               <App
                 emotionCache={emotionCache}
+                apolloClient={apolloClient}
                 {...props}
               />
             );

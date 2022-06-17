@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { GlobalStyles } from '@mui/material';
+import { ApolloProvider, ApolloClient } from '@apollo/client';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -10,6 +11,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import clientEmotionCache from '@/emotion-cache';
+import clientApolloClient from '@/apollo-client';
 import { Global, Colors, Typography } from '@/styles/global';
 
 type NextPageWithLayout = NextPage & {
@@ -18,6 +20,7 @@ type NextPageWithLayout = NextPage & {
 
 interface ExtendedAppProps extends AppProps {
   emotionCache?: EmotionCache;
+  apolloClient?: ApolloClient<unknown>;
   Component: NextPageWithLayout;
 }
 
@@ -26,6 +29,7 @@ export default function App(props: ExtendedAppProps) {
     Component,
     pageProps,
     emotionCache = clientEmotionCache,
+    apolloClient = clientApolloClient,
   } = props;
 
   const getLayout = Component.getLayout ?? ((page) => page);
@@ -81,29 +85,31 @@ export default function App(props: ExtendedAppProps) {
   );
 
   return (
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <meta name="theme-color" content={theme.palette.primary.main} />
-        <meta property="og:title" content="Demo" />
-        <meta property="og:type" content="website" />
-        <title>Demo</title>
-      </Head>
-      <SnackbarProvider
-        maxSnack={3}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-      >
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <GlobalStyles styles={Global(theme) as any} />
-            {getLayout(<Component {...pageProps} />)}
-          </ThemeProvider>
-        </LocalizationProvider>
-      </SnackbarProvider>
-    </CacheProvider>
+    <ApolloProvider client={apolloClient}>
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta property="og:title" content="Demo" />
+          <meta property="og:type" content="website" />
+          <title>Demo</title>
+        </Head>
+        <SnackbarProvider
+          maxSnack={3}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+        >
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <GlobalStyles styles={Global(theme) as any} />
+              {getLayout(<Component {...pageProps} />)}
+            </ThemeProvider>
+          </LocalizationProvider>
+        </SnackbarProvider>
+      </CacheProvider>
+    </ApolloProvider>
   );
 }

@@ -18,6 +18,8 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
+      "@hooks": ["src/hooks"],
+      "@types": ["src/types"],
       "@/*": ["*"]
     }
   },
