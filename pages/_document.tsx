@@ -1,11 +1,13 @@
 import createEmotionServer from '@emotion/server/create-instance';
 import NextDocument, { Head, Html, Main, NextScript } from 'next/document';
-import emotionCache from '@/emotion-cache';
+import theme from '@/styles/theme';
+import createEmotionCache from '@/emotion-cache';
 import apolloClient from '@/apollo-client';
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: any) {
     const originalRenderPage = ctx.renderPage;
+    const emotionCache = createEmotionCache();
     const { extractCriticalToChunks } = createEmotionServer(emotionCache);
 
     ctx.renderPage = () =>
@@ -41,6 +43,7 @@ export default class Document extends NextDocument {
     return (
       <Html lang="en">
         <Head>
+          <meta name="theme-color" content={theme.palette.primary.main} />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link
             rel="stylesheet"

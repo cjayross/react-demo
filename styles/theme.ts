@@ -1,6 +1,6 @@
-import { PaletteOptions, Theme } from '@mui/material/styles';
+import { createTheme, PaletteOptions, Theme } from '@mui/material/styles';
 
-export const Colors: PaletteOptions = {
+const Colors: PaletteOptions = {
   mode: 'light',
 
   background: {
@@ -21,7 +21,7 @@ export const Colors: PaletteOptions = {
   },
 };
 
-export const Typography = {
+const Typography = {
   h1: {
     fontWeight: 500,
     fontSize: 35,
@@ -63,7 +63,7 @@ export const Typography = {
   },
 };
 
-export const Global = (theme: Theme) => ({
+const Global: any = (theme: Theme) => ({
   '*': {
     position: 'relative',
     boxSizing: 'border-box',
@@ -85,3 +85,52 @@ export const Global = (theme: Theme) => ({
     textDecoration: 'none',
   },
 });
+
+const theme = createTheme({
+  palette: Colors,
+  typography: Typography,
+
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          borderRadius: '24px',
+        },
+      },
+
+      defaultProps: {
+        disableElevation: true,
+      },
+    },
+
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: '#B8B8B4',
+        },
+      },
+    },
+
+    MuiGrid: {
+      styleOverrides: {
+        root: {
+          maxWidth: 'unset',
+        },
+
+        item: {
+          maxWidth: 'unset',
+        },
+      },
+    },
+  },
+
+  mixins: {
+    toolbar: {
+      minHeight: '56px',
+    },
+  },
+});
+
+export default theme;
+export { Global };
