@@ -9,27 +9,12 @@ export default function Main(page: ReactElement): ReactNode {
   useEffect(() => void (container.current = window?.document.body), []);
 
   return (
-    <Box
-      sx={{ display: 'flex', pt: (theme) => theme.mixins.toolbar.minHeight }}
-    >
-      <AppBar
-        position="fixed"
-        sx={{
-          flexShrink: { sm: 0 },
-          ml: { sm: '20rem' },
-        }}
-      >
+    <Box className="flex pt-14">
+      <AppBar position="fixed" className="sm:shrink-0">
         <Header />
       </AppBar>
 
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          backgroundColor: (theme) => theme.palette.background.paper,
-        }}
-      >
+      <Box component="main" className="grow p-6">
         {page}
       </Box>
     </Box>

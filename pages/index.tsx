@@ -31,7 +31,7 @@ export default function IndexPage(_: IndexPageProps): ReactElement {
 
   return (
     <Stack
-      sx={{ width: '100%', justifyContent: 'center', alignItems: 'center' }}
+      className="w-full justify-center items-center"
       direction="row"
       spacing={5}
     >

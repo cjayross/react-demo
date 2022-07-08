@@ -12,6 +12,7 @@ import type { AppProps } from 'next/app';
 import theme, { Global } from '@/styles/theme';
 import createEmotionCache from '@/emotion-cache';
 import clientApolloClient from '@/apollo-client';
+import '@/styles/globals.css';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

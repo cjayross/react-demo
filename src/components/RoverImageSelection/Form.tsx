@@ -12,12 +12,7 @@ export default function Form(props: FormProps): ReactElement {
   const { value, onChange } = props;
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
+    <Box className="flex justify-center">
       <StaticDatePicker
         openTo="day"
         disableFuture={true}

@@ -18,63 +18,31 @@ export default function Viewport(props: ViewportProps): ReactElement {
 
   useEffect(() => setSpinner(loading), [loading]);
 
-  const hidden =
-    loading || !images.length
-      ? {
-          opacity: 0,
-        }
-      : {};
+  const hidden = loading || !images.length ? { opacity: 0 } : {};
 
   const LoadingMarkup =
     spinner && loading ? (
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 'calc(50% - 2px)',
-          left: '25%',
-          right: '25%',
-        }}
-      >
+      <Box className="absolute top-[calc(50%-2px)] inset-x-1/4">
         <LinearProgress />
       </Box>
     ) : null;
 
   const NoContentMarkup =
     !loading && !images.length ? (
-      <Box
-        sx={{
-          color: (theme) => theme.palette.text.secondary,
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-        }}
-      >
-        <CancelPresentationIcon aria-label="No Content" sx={{ fontSize: 70 }} />
+      <Box className="absolute inset-0 flex flex-col justify-center items-center opacity-disabled">
+        <CancelPresentationIcon aria-label="No Content" className="text-7xl" />
         <Typography variant="h5">No Images Found</Typography>
       </Box>
     ) : null;
 
   return (
-    <Card sx={{ width: 500 }}>
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          paddingTop: '100%',
-        }}
-      />
+    <Card className="w-[32rem]">
+      <Box className="absolute inset-0 pt-[100%]" />
       {NoContentMarkup}
       {LoadingMarkup}
       <CardMedia
-        style={{ width: 500, aspectRatio: '1 / 1', ...hidden }}
+        style={{ backfaceVisibility: 'hidden', ...hidden }}
+        className="aspect-square w-[32rem]"
         component="img"
         image={images[0]}
         alt="Example Image"

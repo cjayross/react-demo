@@ -107,7 +107,7 @@ const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: '#B8B8B4',
+          color: '#b8b8b4',
         },
       },
     },
@@ -122,12 +122,6 @@ const theme = createTheme({
           maxWidth: 'unset',
         },
       },
-    },
-  },
-
-  mixins: {
-    toolbar: {
-      minHeight: '56px',
     },
   },
 });
